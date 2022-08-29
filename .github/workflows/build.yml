@@ -2,7 +2,7 @@ name: Firmware build
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, jl/add_direct_read_for_accel ]
   pull_request:
     branches: [ master ]
 
