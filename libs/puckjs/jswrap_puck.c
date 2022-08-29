@@ -1058,6 +1058,31 @@ JsVar *jswrap_puck_accel() {
 }
 
 /*JSON{
+  "type" : "staticmethod",
+  "class" : "Puck",
+  "name" : "accel_get_direct",
+  "ifdef" : "PUCKJS",
+  "generate" : "jswrap_puck_accel_get_direct",
+  "return" : ["JsVar", "An Object `{acc:{x,y,z}, gyro:{x,y,z}}` of accelerometer/gyro readings" ]
+}
+Just return the current reading (for use with puckjsv2-accel-movement)
+
+The values reported are the raw values from the chip. In normal configuration:
+
+* accelerometer: full-scale (32768) is 4g, so you need to divide by 8192 to get correctly scaled values
+* gyro: full-scale (32768) is 245 dps, so you need to divide by 134 to get correctly scaled values
+
+If taking more than one reading, we'd suggest you use `Puck.accelOn()` and the `Puck.accel` event.
+*/
+JsVar *jswrap_puck_accel_get_direct() {
+    accel_read();
+  JsVar *o = jsvNewObject();
+  jsvObjectSetChildAndUnLock(o,"acc",to_xyz(accel_reading, 1));
+  jsvObjectSetChildAndUnLock(o,"gyro",to_xyz(gyro_reading, 1));
+  return o;
+}
+
+/*JSON{
     "type" : "staticmethod",
     "class" : "Puck",
     "name" : "accelWr",

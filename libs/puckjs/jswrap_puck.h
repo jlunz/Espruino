@@ -45,6 +45,7 @@ JsVarFloat jswrap_puck_getTemperature();
 void jswrap_puck_accelOn(JsVarFloat hz);
 void jswrap_puck_accelOff();
 JsVar *jswrap_puck_accel();
+JsVar *jswrap_puck_accel_get_direct();
 void jswrap_puck_accelWr(JsVarInt reg, JsVarInt data);
 int jswrap_puck_accelRd(JsVarInt reg);
 
